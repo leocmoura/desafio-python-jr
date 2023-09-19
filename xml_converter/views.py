@@ -2,7 +2,6 @@ from django.http import JsonResponse
 from django.shortcuts import render
 from xml_converter.forms import ArquivoXMLForm
 import xml.etree.ElementTree as ET
-import json
 
 def convert_to_dict(request):
     xml_file = ArquivoXMLForm(request.POST, request.FILES)
