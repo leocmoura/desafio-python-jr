@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<library>
+  <book>
+    <title>Leozin e sua life</title>
+    <author>L.C. Moura</author>
+    <published_year>1996</published_year>
+  </book>
+  <book>
+    <title>The Great Gatsby</title>
+    <author>F. Scott Fitzgerald</author>
+    <published_year>1926</published_year>
+  </book>
+</library>
