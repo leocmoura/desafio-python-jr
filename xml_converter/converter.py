@@ -1,13 +1,10 @@
 from xml.etree import ElementTree
-import io
 
 def convert_to_dict(arquivo):
-    xml_file = io.StringIO(arquivo) # objeto de arquivo temporário a partir do conteúdo XML
-    tree = ElementTree.parse(xml_file)
+    # xml_file = io.StringIO(arquivo) # objeto de arquivo temporário a partir do conteúdo XML
+    tree = ElementTree.parse(arquivo)
     root = tree.getroot()
     result = xml_to_dict(root, [])
-    # result = xml_to_dict(root)
-
     return {root.tag: result}
 
 def xml_to_dict(xml, result: list) -> dict:
@@ -19,4 +16,4 @@ def xml_to_dict(xml, result: list) -> dict:
             key_value = {child.tag: xml_to_dict(child, [])}
             result.append(key_value)
 
-    return result
+    return result if result else ""
