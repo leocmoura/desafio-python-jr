@@ -1,15 +1,13 @@
 from rest_framework import serializers
 from rest_framework.serializers import  FileField, JSONField 
-from xml_converter.models import ArquivoXML
 from xml_converter.converter import convert_to_dict
 
 class CreateXMLtoDictAPISerializer(serializers.Serializer):
+    class Meta:
+        fields = 'file'
     file = FileField()
-    converted_data = JSONField(read_only=True)
+    converted_data = JSONField(required=False)
 
     def create(self, validated_data):
-        file = validated_data.pop("file")
-        converted_data = convert_to_dict(file)
-        validated_data['converted_data'] = converted_data
+        validated_data["converted_data"] = convert_to_dict(validated_data["file"])
         return validated_data
-

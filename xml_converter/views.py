@@ -1,8 +1,11 @@
 from django.http import JsonResponse
 from django.shortcuts import render
+from rest_framework.response import Response
+from rest_framework.generics import CreateAPIView
+from rest_framework.status import HTTP_200_OK
+
 from xml_converter.forms import ArquivoXMLForm
 from xml_converter.converter import *
-from rest_framework.generics import CreateAPIView
 from xml_converter.serializer import CreateXMLtoDictAPISerializer
 
 def upload_page(request):
@@ -18,3 +21,10 @@ def upload_page(request):
 
 class CreateXMLtoDictAPI(CreateAPIView):
     serializer_class = CreateXMLtoDictAPISerializer
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.serializer_class(None, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+
+        return Response(serializer.data["converted_data"], status=HTTP_200_OK)
