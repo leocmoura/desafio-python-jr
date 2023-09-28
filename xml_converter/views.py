@@ -16,8 +16,7 @@ def upload_page(request):
             xml_converted = convert_to_dict(file)
 
             if 'error' in xml_converted:
-                response_data = {'error_message': xml_converted['error']}
-                return JsonResponse(response_data, status=HTTP_400_BAD_REQUEST)
+                return JsonResponse(xml_converted, status=HTTP_400_BAD_REQUEST)
             else:
                 return JsonResponse(xml_converted)
     
