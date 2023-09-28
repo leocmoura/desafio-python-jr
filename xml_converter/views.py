@@ -2,7 +2,7 @@ from django.http import JsonResponse
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.generics import CreateAPIView
-from rest_framework.status import HTTP_200_OK
+from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
 
 from xml_converter.forms import ArquivoXMLForm
 from xml_converter.converter import *
@@ -15,7 +15,10 @@ def upload_page(request):
             file = form.cleaned_data['file']
             xml_converted = convert_to_dict(file)
 
-            return JsonResponse(xml_converted)
+            if 'error' in xml_converted:
+                return JsonResponse(xml_converted, status=HTTP_400_BAD_REQUEST)
+            else:
+                return JsonResponse(xml_converted)
     
     return render(request, "upload_page.html", {'form': form})
 
