@@ -67,3 +67,13 @@ class XMLConversionTestCase(TestCase):
             self.assertEqual(response.json(), {
                 "error": "Arquivo XML invalido."
             }) 
+
+    def test_api_convert_invalid_document(self):
+        with (TEST_DIR / Path('xml_invalid.xml')).open() as fp:
+            response = self.client.post('/api/converter/convert/', {
+                'file': fp,
+            })
+            # self.assertEqual(response.status_code, 400)
+            self.assertEqual(response.json(), {
+                "error": "Arquivo XML invalido."
+            }) 
