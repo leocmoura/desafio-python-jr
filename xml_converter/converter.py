@@ -2,13 +2,13 @@ from xml.etree import ElementTree
 from xml.etree import ElementTree as ET
 
 def convert_to_dict(file):
-    try:
+    # try:
         tree = ElementTree.parse(file)
         root = tree.getroot()
         result = xml_to_dict(root, [])
         return {root.tag: result} if result else {'Root': ''}
-    except ET.ParseError as e:
-        return {'error': 'converter XML invalido.'}
+    # except ET.ParseError as e:
+    #     return {'error': 'converter XML invalido.'}
 
 def xml_to_dict(xml, result: list) -> dict:
     for child in xml:
