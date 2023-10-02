@@ -26,8 +26,10 @@ class CreateXMLtoDictAPI(CreateAPIView):
     serializer_class = CreateXMLtoDictAPISerializer
 
     def post(self, request, *args, **kwargs):
-        serializer = self.serializer_class(None, data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-
-        return Response(serializer.data["converted_data"], status=HTTP_200_OK)
+        try:
+            serializer = self.serializer_class(None, data=request.data)
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
+            return Response(serializer.data["converted_data"], status=HTTP_200_OK)
+        except Exception as e:
+            return Response({'error': 'views XML invalido.'}, status=HTTP_400_BAD_REQUEST)

@@ -73,7 +73,7 @@ class XMLConversionTestCase(TestCase):
             response = self.client.post('/api/converter/convert/', {
                 'file': fp,
             })
-            self.assertNotEqual(response.status_code, 400)
+            self.assertEqual(response.status_code, 400)
             self.assertEqual(response.json(), {
                 "error": "Arquivo XML invalido."
             }) 

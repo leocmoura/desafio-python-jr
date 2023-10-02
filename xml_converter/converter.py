@@ -8,7 +8,7 @@ def convert_to_dict(file):
         result = xml_to_dict(root, [])
         return {root.tag: result} if result else {'Root': ''}
     except ET.ParseError as e:
-        return {'error': 'Arquivo XML invalido.'}
+        return {'error': 'converter XML invalido.'}
 
 def xml_to_dict(xml, result: list) -> dict:
     for child in xml:
