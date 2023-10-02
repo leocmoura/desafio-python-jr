@@ -21,20 +21,6 @@ def upload_page(request):
     
     return render(request, "upload_page.html", {'form': form})
 
-# def upload_page(request):
-#     form = ArquivoXMLForm(request.POST, request.FILES)
-#     if request.method == 'POST':
-#         if form.is_valid():
-#             file = form.cleaned_data['file']
-#             xml_converted = convert_to_dict(file)
-
-#             if 'error' in xml_converted:
-#                 return JsonResponse(xml_converted, status=HTTP_400_BAD_REQUEST)
-#             else:
-#                 return JsonResponse(xml_converted)
-    
-#     return render(request, "upload_page.html", {'form': form})
-
 class CreateXMLtoDictAPI(CreateAPIView):
     serializer_class = CreateXMLtoDictAPISerializer
 
