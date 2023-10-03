@@ -16,10 +16,11 @@ def upload_page(request):
                 file = form.cleaned_data['file']
                 xml_converted = convert_to_dict(file)
                 return JsonResponse(xml_converted)
-        except Exception as e:
-            return JsonResponse({'error': 'Arquivo XML invalido.'}, status=HTTP_400_BAD_REQUEST)
+        except MinhaExcecaoPersonalizada as e:
+            return JsonResponse({'error': e.mensagem}, status=HTTP_400_BAD_REQUEST)
     
     return render(request, "upload_page.html", {'form': form})
+
 
 class CreateXMLtoDictAPI(CreateAPIView):
     serializer_class = CreateXMLtoDictAPISerializer
@@ -30,5 +31,28 @@ class CreateXMLtoDictAPI(CreateAPIView):
             serializer.is_valid(raise_exception=True)
             serializer.save()
             return Response(serializer.data["converted_data"], status=HTTP_200_OK)
-        except Exception as e:
+        except MinhaExcecaoPersonalizada as e:
             return Response({'error': 'Arquivo XML invalido.'}, status=HTTP_400_BAD_REQUEST)
+
+# def upload_page(request):
+#     form = ArquivoXMLForm(request.POST, request.FILES)
+#     if request.method == 'POST':
+#         if form.is_valid():
+#             file = form.cleaned_data['file']
+#             xml_converted = convert_to_dict(file)
+
+#             if 'error' in xml_converted:
+#                 return JsonResponse(xml_converted, status=HTTP_400_BAD_REQUEST)
+#             else:
+#                 return JsonResponse(xml_converted)
+
+#     return render(request, "upload_page.html", {'form': form})
+
+# class CreateXMLtoDictAPI(CreateAPIView):
+#     serializer_class = CreateXMLtoDictAPISerializer
+
+#     def post(self, request, *args, **kwargs):
+#         serializer = self.serializer_class(None, data=request.data)
+#         serializer.is_valid(raise_exception=True)
+#         serializer.save()
+#         return Response(serializer.data["converted_data"], status=HTTP_200_OK)
