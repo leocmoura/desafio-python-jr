@@ -32,7 +32,7 @@ class CreateXMLtoDictAPI(CreateAPIView):
             serializer.save()
             return Response(serializer.data["converted_data"], status=HTTP_200_OK)
         except MinhaExcecaoPersonalizada as e:
-            return Response({'error': 'Arquivo XML invalido.'}, status=HTTP_400_BAD_REQUEST)
+            return JsonResponse({'error': e.mensagem}, status=HTTP_400_BAD_REQUEST)
 
 # def upload_page(request):
 #     form = ArquivoXMLForm(request.POST, request.FILES)
