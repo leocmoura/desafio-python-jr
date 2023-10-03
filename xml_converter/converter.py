@@ -1,5 +1,6 @@
 from xml.etree import ElementTree
 from xml.etree import ElementTree as ET
+import json
 
 class MinhaExcecaoPersonalizada(Exception):
     def __init__(self, mensagem="Ocorreu um erro personalizado"):
