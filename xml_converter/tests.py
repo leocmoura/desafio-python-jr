@@ -65,7 +65,7 @@ class XMLConversionTestCase(TestCase):
             })
             self.assertEqual(response.status_code, 400)
             self.assertEqual(response.json(), {
-                "error": "Arquivo XML invalido."
+                "error": "Invalid xml file."
             }) 
 
     def test_api_convert_invalid_document(self):
@@ -75,5 +75,5 @@ class XMLConversionTestCase(TestCase):
             })
             self.assertEqual(response.status_code, 400)
             self.assertEqual(response.json(), {
-                "error": "Arquivo XML invalido."
+                "error": "Invalid xml file."
             }) 

@@ -1,6 +1,5 @@
 from xml.etree import ElementTree
 from xml.etree import ElementTree as ET
-import json
 
 class MinhaExcecaoPersonalizada(Exception):
     def __init__(self, mensagem="Ocorreu um erro personalizado"):
@@ -14,7 +13,7 @@ def convert_to_dict(file):
         result = xml_to_dict(root, [])
         return {root.tag: result} if result else {'Root': ''}
     except ET.ParseError as e:
-        raise MinhaExcecaoPersonalizada("Arquivo XML invalido.")
+        raise MinhaExcecaoPersonalizada("Invalid xml file.")
 
 def xml_to_dict(xml, result: list) -> dict:
     for child in xml:
